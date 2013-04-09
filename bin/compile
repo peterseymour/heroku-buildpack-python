@@ -64,6 +64,9 @@ export LD_LIBRARY_PATH=/app/.heroku/vendor/lib
 # Switch to the repo's context.
 cd $BUILD_DIR
 
+# Node.js install
+source $BIN_DIR/steps/node
+
 # Experimental pre_compile hook.
 source $BIN_DIR/steps/hooks/pre_compile
 
