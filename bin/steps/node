@@ -5,7 +5,7 @@ set -o pipefail   # don't ignore exit codes when piping output
 # set -x          # enable debugging
 
 # Configure directories
-build_dir=$1
+build_dir=/app #$1
 cache_dir=$2
 env_dir=$3
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
@@ -20,7 +20,9 @@ source $bp_dir/bin/common.sh
 trap cat_npm_debug_log ERR
 
 status $1 $2 $3
-status $(ls $build_dir)
+status $(ls $1)
+status $(ls $2)
+status $(ls $3)
 
 # Look in package.json's engines.node field for a semver range
 semver_range=$(cat $build_dir/package.json | $bp_dir/vendor/jq -r .engines.node)
