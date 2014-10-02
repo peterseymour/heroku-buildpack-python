@@ -10,8 +10,6 @@ cache_dir=$2
 env_dir=$3
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
 
-echo $(ls $build_dir)
-
 # Fix leak
 unset GIT_DIR
 
@@ -20,6 +18,9 @@ source $bp_dir/bin/common.sh
 
 # Output npm debug info on error
 trap cat_npm_debug_log ERR
+
+status $1 $2 $3
+status $(ls $build_dir)
 
 # Look in package.json's engines.node field for a semver range
 semver_range=$(cat $build_dir/package.json | $bp_dir/vendor/jq -r .engines.node)
